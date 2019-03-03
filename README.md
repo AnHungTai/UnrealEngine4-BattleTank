@@ -20,4 +20,5 @@ An-Hung Tai
 * Setting up a GitHub repo
 * Landscape setup
 * Low poly landscape
+* Configuring a tank
 *
