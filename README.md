@@ -19,4 +19,5 @@ An-Hung Tai
 ### Commit
 * Setting up a GitHub repo
 * Landscape setup
-*  
+* Low poly landscape
+*
