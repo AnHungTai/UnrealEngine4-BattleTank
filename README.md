@@ -21,4 +21,5 @@ An-Hung Tai
 * Landscape setup
 * Low poly landscape
 * Configuring a tank
+* Third person camera setup
 *
