@@ -23,4 +23,5 @@ An-Hung Tai
 * Configuring a tank
 * Third person camera setup
 * Main Menu, UI setup
+* Delegating to components
 *
