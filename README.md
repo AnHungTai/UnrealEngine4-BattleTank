@@ -26,4 +26,5 @@ An-Hung Tai
 * Delegating to components
 * AI controller cpp setup
 * Finished DeprojectScreenToWorld
+* Finished AimAt method
 *
