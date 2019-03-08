@@ -27,4 +27,5 @@ An-Hung Tai
 * AI controller cpp setup
 * Finished DeprojectScreenToWorld
 * Finished AimAt method
+* Introduce barrel c++ static mesh
 *
