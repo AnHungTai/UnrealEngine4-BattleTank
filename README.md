@@ -29,4 +29,5 @@ An-Hung Tai
 * Finished AimAt method
 * Introduce barrel c++ static mesh
 * Barrel/ Turret moving with aiming
+* Projectile prototype
 *
