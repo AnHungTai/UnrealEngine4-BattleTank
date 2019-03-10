@@ -32,6 +32,4 @@ void AProjectile::LaunchProjectile(float Speed)
 	// because the vector is for barrel direction, low poly tank modified.
 	ProjectileMovement->SetVelocityInLocalSpace(FVector(0.0, -1.0, 0.0) * Speed);
 	ProjectileMovement->Activate();
-
-	UE_LOG(LogTemp, Warning, TEXT("firing at launch speed: %f!"), Speed);
 }

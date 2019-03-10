@@ -31,4 +31,5 @@ An-Hung Tai
 * Barrel/ Turret moving with aiming
 * Projectile prototype
 * AI tank fires
+* Complete manual tank movement
 *
