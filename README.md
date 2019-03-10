@@ -30,4 +30,5 @@ An-Hung Tai
 * Introduce barrel c++ static mesh
 * Barrel/ Turret moving with aiming
 * Projectile prototype
+* AI tank fires
 *
