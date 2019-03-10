@@ -3,7 +3,14 @@
 #include "TankBarrel.h"
 
 
-void UTankBarrel::Elevate(float DegreePerSecond)
+void UTankBarrel::Elevate(float RelativeSpeed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Elevate called"));
+	RelativeSpeed = FMath::Clamp<float>(RelativeSpeed, -1.0, +1.0);
+	auto ElevationChange = RelativeSpeed * MaxDegreePerSecond * GetWorld()->DeltaTimeSeconds;
+
+	// low poly tank need to use roll instead of pitch to elevate barrel
+	// beause of the pivot point direction
+	auto RawNewElevation = RelativeRotation.Roll + ElevationChange;
+	auto Elevation = FMath::Clamp<float>(RawNewElevation, MinElevationDegree, MaxElevationDegree);
+	SetRelativeRotation(FRotator(0.0, 0.0, Elevation));
 }

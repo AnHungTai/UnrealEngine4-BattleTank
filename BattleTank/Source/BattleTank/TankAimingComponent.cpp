@@ -2,6 +2,7 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
@@ -14,19 +15,27 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 	// ...
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
+	if (!BarrelToSet) { return; }
 	Barrel = BarrelToSet;
+}
+
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	if (!TurretToSet) { return; }
+	Turret = TurretToSet;
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	if (!Barrel) { return; }
+	if (!Turret) { return; }
 
 	FVector LaunchVelocity(0); // out parameter
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -37,21 +46,49 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
-		ESuggestProjVelocityTraceOption::DoNotTrace
+		false,
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace,
+		FCollisionResponseParams::DefaultResponseParam,
+		TArray<AActor*>(),
+		true // draw trace line
 	);
 	if (bHaveAimSolution)
 	{
 		FVector AimDirection = LaunchVelocity.GetSafeNormal();
 		MoveBarrelToward(AimDirection);
+
+		float Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: solution found."), Time);
 	} 
+	else
+	{
+		float Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: No aim solution found."), Time);
+	}
 }
 
 void UTankAimingComponent::MoveBarrelToward(FVector AimDirection)
 {
-	auto BarrelRotator = Barrel->GetRightVector().Rotation(); 
+	// low poly tank need to use - GetRightVector() instead of GetForwardVector()
+	// beause of the pivot point direction
+	auto BarrelRotator = (-Barrel->GetRightVector()).Rotation();
+	// where the player is aiming
 	auto AimAsRotator = AimDirection.Rotation();
+	// the difference of vector between player aiming and barrel
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRotator.Pitch);
+
+	// turret choose the shortest direction to rotate
+	if (FMath::Abs(DeltaRotator.Yaw) < 180.0)
+	{
+		Turret->Rotate(DeltaRotator.Yaw);
+	}
+	else
+	{
+		Turret->Rotate(-DeltaRotator.Yaw);
+	}	
 }
 

@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TankAimingComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
  // Forward Delaration
 class UTankBarrel;
+class UTankTurret;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -21,6 +22,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
+
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
@@ -30,13 +34,10 @@ private:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 60000.0;
+		float LaunchSpeed = 7500.0;
 };
