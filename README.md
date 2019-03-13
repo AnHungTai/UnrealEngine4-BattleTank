@@ -33,4 +33,5 @@ An-Hung Tai
 * AI tank fires
 * Complete manual tank movement
 * Finished AI moving
+* Refactoring I: fixing aiming UI
 *

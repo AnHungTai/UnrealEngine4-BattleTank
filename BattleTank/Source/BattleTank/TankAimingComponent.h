@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//  Copyright An-Hung Tai
 
 #pragma once
 
@@ -7,8 +7,17 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
-// Forward Declaration
-class UTankBarrel; 
+// eum for aiming state
+UENUM()
+enum class EFiringStatus : uint8
+{	
+	Reloading,
+	Aiming,
+	Locked
+};
+
+// Forward Delaration 
+class UTankBarrel;
 class UTankTurret;
 
 // Hold barrel's properties 
@@ -18,16 +27,19 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
-	UTankAimingComponent();
-
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	void SetTurretReference(UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = "Status")
+	EFiringStatus FiringStatus = EFiringStatus::Reloading;
+
 private:
+	// Sets default values for this component's properties
+	UTankAimingComponent();
+
 	UTankBarrel* Barrel = nullptr;
 
 	UTankTurret* Turret = nullptr;
