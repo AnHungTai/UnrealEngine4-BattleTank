@@ -32,4 +32,5 @@ An-Hung Tai
 * Projectile prototype
 * AI tank fires
 * Complete manual tank movement
+* Finished AI moving
 *

@@ -47,7 +47,7 @@ private:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float LaunchSpeed = 7500.0;
+	float LaunchSpeed = 2500.0;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float ReloadTimeInSecond = 1.5;
