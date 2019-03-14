@@ -2,21 +2,14 @@
 
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
-#include "Tank.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
 
 void ATankPlayerController::BeginPlay() 
 {
 	Super::BeginPlay();
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (AimingComponent)
-	{
-		FoundAimingComponent(AimingComponent);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController can't find aiming component at BeginPlay."));
-	}
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
+	FoundAimingComponent(AimingComponent);
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -27,18 +20,14 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::AimTowardCrosshair()
 {
-	if (!GetControlledTank()) { return; }
-	else
-	{
-		FVector HitLocation; // Out parameter
-		GetSightRayHitLocation(OUT HitLocation); // Has "side-effect", is going to raytrace
-		GetControlledTank()->AimAt(HitLocation);
-	}
-}
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
+	FVector HitLocation; // Out parameter
+	if(GetSightRayHitLocation(OUT HitLocation)) // Has "side-effect", is going to raytrace
+	{
+		AimingComponent->AimAt(HitLocation);
+	}
 }
 
 //Get world location if linetrace through crosshair

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//  Copyright An-Hung Tai
 
 #include "Projectile.h"
 
@@ -30,6 +30,7 @@ void AProjectile::LaunchProjectile(float Speed)
 {
 	// FVector(0.0, -1.0, 0.0) instead of FVector::ForwardVector 
 	// because the vector is for barrel direction, low poly tank modified.
+	if (!ensure(ProjectileMovement)) { return; }
 	ProjectileMovement->SetVelocityInLocalSpace(FVector(0.0, -1.0, 0.0) * Speed);
 	ProjectileMovement->Activate();
 }

@@ -3,6 +3,7 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 #include "Runtime/Engine/Classes/GameFramework/Actor.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "Runtime/Engine/Classes/Engine/World.h"
@@ -26,10 +27,9 @@ void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* Tur
 	Turret = TurretToSet;
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
-	if (!Barrel) { return; }
-	if (!Turret) { return; }
+	if (!ensure(Barrel)) { return; }
 
 	FVector LaunchVelocity(0); // out parameter
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -57,7 +57,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelToward(FVector AimDirection)
 {
-	if (!Barrel || !Turret) { return; }
+	if (!ensure(Barrel && Turret)) { return; }
 	// low poly tank need to use - GetRightVector() instead of GetForwardVector()
 	// beause of the pivot point direction
 	auto BarrelRotator = (-Barrel->GetRightVector()).Rotation();
@@ -79,3 +79,21 @@ void UTankAimingComponent::MoveBarrelToward(FVector AimDirection)
 	}	
 }
 
+void UTankAimingComponent::Fire()
+{
+	if (!ensure(Barrel && ProjectileBlueprint)) { return; }
+
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSecond;
+	if (isReloaded)
+	{
+		// spawn a projectile at the socket location one the barrel
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>
+			(
+				ProjectileBlueprint,
+				Barrel->GetSocketLocation(FName("Projectile")),
+				Barrel->GetSocketRotation(FName("Projectile"))
+				);
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
+}

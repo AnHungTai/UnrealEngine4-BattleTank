@@ -6,7 +6,6 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
 /**
  * 
  */
@@ -21,5 +20,5 @@ private:
 	virtual void Tick(float DeltaTime) override;	
 
 	// how close the AI close to the player
-	float AcceptanceRadius = 3000.0;
+	float AcceptanceRadius = 2000.0;
 };

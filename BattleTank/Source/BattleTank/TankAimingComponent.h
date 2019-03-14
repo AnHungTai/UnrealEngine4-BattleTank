@@ -19,6 +19,7 @@ enum class EFiringStatus : uint8
 // Forward Delaration 
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 // Hold barrel's properties 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
@@ -30,7 +31,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
+
+	void AimAt(FVector HitLocation);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Status")
@@ -45,4 +49,15 @@ private:
 	UTankTurret* Turret = nullptr;
 
 	void MoveBarrelToward(FVector AimDirection);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 2500.0;
+
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	float ReloadTimeInSecond = 1.0;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	TSubclassOf<AProjectile>ProjectileBlueprint;
+
+	double LastFireTime = 0.0;
 };
