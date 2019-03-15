@@ -34,7 +34,7 @@ private:
 	float MovingMultiplier = 1.0;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Movement")
-	float TurningMultiplier = 3.0;
+	float TurningMultiplier = 5.0;
 
 	// called from the pathfinding logic by the AI controllers
 	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;

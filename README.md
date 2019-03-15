@@ -35,4 +35,5 @@ An-Hung Tai
 * Finished AI moving
 * Refactoring I: fixing aiming UI
 * Refactoring II: fixing aiming & firing
+* Setup sideway forces
 *
