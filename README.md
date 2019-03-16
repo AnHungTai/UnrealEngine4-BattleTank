@@ -37,4 +37,5 @@ An-Hung Tai
 * Refactoring II: fixing aiming & firing
 * Setup sideway forces
 * Avoid flying throttle
+* Tweaking tank AI
 *

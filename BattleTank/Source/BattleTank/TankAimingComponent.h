@@ -36,6 +36,8 @@ public:
 
 	void AimAt(FVector HitLocation);
 
+	EFiringStatus GetFiringStatus() const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Status")
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
@@ -64,7 +66,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float ReloadTimeInSecond = 3.0;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile>ProjectileBlueprint;
 
 	double LastFireTime = 0.0;
