@@ -13,7 +13,8 @@ enum class EFiringStatus : uint8
 {	
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 // Forward Delaration 
@@ -33,6 +34,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetAmmoLeft() const;
 
 	void AimAt(FVector HitLocation);
 
@@ -70,4 +74,6 @@ private:
 	TSubclassOf<AProjectile>ProjectileBlueprint;
 
 	double LastFireTime = 0.0;
+
+	int AmmoLeft = 5;
 };

@@ -38,4 +38,5 @@ An-Hung Tai
 * Setup sideway forces
 * Avoid flying throttle
 * Tweaking tank AI
+* Ammo left display
 *
