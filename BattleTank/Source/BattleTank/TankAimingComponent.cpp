@@ -23,6 +23,7 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::BeginPlay()
 {
+	Super::BeginPlay();
 	// so that first fire is after initial reload
 	LastFireTime = FPlatformTime::Seconds();
 }
@@ -115,7 +116,7 @@ void UTankAimingComponent::Fire()
 	if (FiringStatus != EFiringStatus::Reloading)
 	{
 		// spawn a projectile at the socket location one the barrel
-		if (!ensure(Barrel && ProjectileBlueprint)) { return; }
+		if (!ensure(Barrel)) { return; }
 		if (!ensure(ProjectileBlueprint)) { return; }
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>
 			(

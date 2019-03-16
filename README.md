@@ -36,4 +36,5 @@ An-Hung Tai
 * Refactoring I: fixing aiming UI
 * Refactoring II: fixing aiming & firing
 * Setup sideway forces
+* Avoid flying throttle
 *
