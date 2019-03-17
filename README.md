@@ -39,4 +39,5 @@ An-Hung Tai
 * Avoid flying throttle
 * Tweaking tank AI
 * Ammo left display
+* Auto mortar setup
 *
