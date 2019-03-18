@@ -40,4 +40,5 @@ An-Hung Tai
 * Tweaking tank AI
 * Ammo left display
 * Auto mortar setup
+* Launch blast setup
 *

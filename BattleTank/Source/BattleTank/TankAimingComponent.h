@@ -36,7 +36,7 @@ public:
 	void Fire();
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetAmmoLeft() const;
+	int32 GetAmmoLeft() const;
 
 	void AimAt(FVector HitLocation);
 
@@ -70,10 +70,11 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float ReloadTimeInSecond = 3.0;
 
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	int32 AmmoLeft = 20;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile>ProjectileBlueprint;
 
 	double LastFireTime = 0.0;
-
-	int AmmoLeft = 5;
 };
