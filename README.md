@@ -41,4 +41,4 @@ An-Hung Tai
 * Ammo left display
 * Auto mortar setup
 * Launch blast setup
-*
+* Impact blast setup
