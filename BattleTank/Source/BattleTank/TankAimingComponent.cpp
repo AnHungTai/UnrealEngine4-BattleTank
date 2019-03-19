@@ -96,7 +96,7 @@ bool UTankAimingComponent::IsBarrelMoving()
 {
 	if (!ensure(Barrel)) { return false; }
 	// -GetRightVector() instead of GetForwardVector() for low poly tank
-	auto BarrelForwardDirection = -(Barrel->GetRightVector());
+	auto BarrelForwardDirection = Barrel->GetForwardVector();
 	return !BarrelForwardDirection.Equals(AimDirection, 0.001);
 }
 
@@ -105,7 +105,7 @@ void UTankAimingComponent::MoveBarrelToward(FVector AimDirection)
 	if (!ensure(Barrel && Turret)) { return; }
 	// low poly tank need to use - GetRightVector() instead of GetForwardVector()
 	// beause of the pivot point direction
-	auto BarrelRotator = (-Barrel->GetRightVector()).Rotation();
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	// where the player is aiming
 	auto AimAsRotator = AimDirection.Rotation();
 	// the difference of vector between player aiming and barrel

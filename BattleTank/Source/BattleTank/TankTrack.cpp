@@ -17,10 +17,10 @@ void UTankTrack::ApplySidewaysForce()
 {
 	// calculate the slippage speed
 	// GetForwardVector()instead of GetRightVector()  for low poly tank
-	auto SlippageSpeed = FVector::DotProduct(GetForwardVector(), GetOwner()->GetVelocity());
+	auto SlippageSpeed = FVector::DotProduct(GetRightVector(), GetOwner()->GetVelocity());
 	// work-out the required acceleration this frame to correct
 	auto DeltaTime = GetWorld()->GetDeltaSeconds();
-	auto CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetForwardVector();
+	auto CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetRightVector();
 	// calculate and apply sideways
 	auto TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
 	auto CorrectionForce = (TankRoot->GetMass()) * CorrectionAcceleration / 2; // two tracks
@@ -35,7 +35,7 @@ void UTankTrack::SetThrottle(float Throttle)
 void UTankTrack::DriveTrack()
 {
 	// -GetRightVector() instead of GetForwardVector() because of low poly tank
-	auto ForceApplied = (-GetRightVector()) * CurrentThrottle * TrackMaxDrivingForce;
+	auto ForceApplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
 	auto ForceLocation = GetComponentLocation();
 	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
 	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);

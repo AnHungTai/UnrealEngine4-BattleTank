@@ -38,13 +38,13 @@ private:
 	float ProjectileBaseDamage = 25.0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
-	float ProjectileMinimumDamage = 5.0;
+	float ProjectileMinimumDamage = 0.0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
-	float FullDamageRangeFraction = 0.1;
+	float FullDamageRangeFraction = 0.25;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
-	float DamageFalloffRatio = 1.0;
+	float DamageFalloffRatio = 2.0;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float DestroyDelay = 3.0;

@@ -45,4 +45,5 @@ An-Hung Tai
 * Hitting impulse setup
 * Take damage detect
 * Health bar & end game detect
+* Fixed tank forward vector
 *
