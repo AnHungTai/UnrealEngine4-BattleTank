@@ -44,4 +44,5 @@ An-Hung Tai
 * Impact blast setup
 * Hitting impulse setup
 * Take damage detect
+* Health bar & end game detect
 *
