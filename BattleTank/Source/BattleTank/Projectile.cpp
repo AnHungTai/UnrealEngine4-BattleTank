@@ -1,7 +1,8 @@
 //  Copyright An-Hung Tai
 
 #include "Projectile.h"
-
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Runtime/Engine/Classes/GameFramework/DamageType.h"
 // Sets default values
 AProjectile::AProjectile()
 {
@@ -55,9 +56,24 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
 
+	// destroy CollisionMesh
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
 
+	UGameplayStatics::ApplyRadialDamageWithFalloff
+	(
+		this,
+		ProjectileBaseDamage,
+		ProjectileMinimumDamage,
+		GetActorLocation(),
+		(ExplosionForce->Radius) * FullDamageRangeFraction,
+		ExplosionForce->Radius,
+		DamageFalloffRatio,
+		UDamageType::StaticClass(),
+		TArray<AActor*>() // damage all actor
+	);
+
+	// destroy Actor
 	FTimerHandle Timer;
 	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimeExpire, DestroyDelay, false);
 }

@@ -29,7 +29,7 @@ void UTankTrack::ApplySidewaysForce()
 
 void UTankTrack::SetThrottle(float Throttle)
 {
-	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -2.0, 2.0);
+	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -2.5, 2.5);
 }
 
 void UTankTrack::DriveTrack()

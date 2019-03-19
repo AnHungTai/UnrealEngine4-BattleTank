@@ -34,6 +34,18 @@ private:
 
 	void OnTimeExpire();
 
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float ProjectileBaseDamage = 25.0;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float ProjectileMinimumDamage = 5.0;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float FullDamageRangeFraction = 0.1;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float DamageFalloffRatio = 1.0;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float DestroyDelay = 3.0;
 

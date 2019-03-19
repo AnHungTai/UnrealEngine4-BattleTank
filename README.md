@@ -43,4 +43,5 @@ An-Hung Tai
 * Launch blast setup
 * Impact blast setup
 * Hitting impulse setup
+* Take damage detect
 *
