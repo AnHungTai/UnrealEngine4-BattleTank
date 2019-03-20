@@ -46,4 +46,5 @@ An-Hung Tai
 * Take damage detect
 * Health bar & end game detect
 * Fixed tank forward vector
+* Fixed mortar forward vector
 *
