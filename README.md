@@ -47,4 +47,5 @@ An-Hung Tai
 * Health bar & end game detect
 * Fixed tank forward vector
 * Fixed mortar forward vector
+* Constrain camera angle via BP
 *
