@@ -49,4 +49,5 @@ An-Hung Tai
 * Fixed mortar forward vector
 * Constrain camera angle via BP
 * Setup physics constraint wheel
+* SpawnActorDeferred introduce
 *
