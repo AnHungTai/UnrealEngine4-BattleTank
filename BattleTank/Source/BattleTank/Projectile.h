@@ -8,6 +8,7 @@
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/PhysicsEngine/RadialForceComponent.h"
+#include "Runtime/Engine/Classes/Components/AudioComponent.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -59,7 +60,16 @@ private:
 	UParticleSystemComponent* ImpactBlast = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
+	URadialForceComponent* RecoilForce = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 	URadialForceComponent* ExplosionForce = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UAudioComponent* LaunchSound = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UAudioComponent* ExplosionSound = nullptr;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);

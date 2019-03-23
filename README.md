@@ -53,4 +53,5 @@ An-Hung Tai
 * Setup constraint wheels
 * Snowy weather
 * Tweaking snow parameter
+* Setup projectile sound
 *

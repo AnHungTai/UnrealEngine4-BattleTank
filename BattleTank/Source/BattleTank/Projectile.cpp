@@ -24,8 +24,18 @@ AProjectile::AProjectile()
 	ImpactBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	ImpactBlast->bAutoActivate = false;
 
+	RecoilForce = CreateDefaultSubobject<URadialForceComponent>(FName("Recoil Force"));
+	RecoilForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
 	ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
 	ExplosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
+	LaunchSound = CreateDefaultSubobject<UAudioComponent>(FName("Launch Sound"));
+	LaunchSound->AttachToComponent(LaunchBlast, FAttachmentTransformRules::KeepRelativeTransform);
+
+	ExplosionSound = CreateDefaultSubobject<UAudioComponent>(FName("Explosion Sound"));
+	ExplosionSound->AttachToComponent(ImpactBlast, FAttachmentTransformRules::KeepRelativeTransform);
+	ExplosionSound->bAutoActivate = false;
 }
 
 // Called when the game starts or when spawned
@@ -43,11 +53,13 @@ void AProjectile::Tick(float DeltaTime)
 
 void AProjectile::LaunchProjectile(float LaunchSpeed)
 {
-	// FVector(0.0, -1.0, 0.0) instead of FVector::ForwardVector 
-	// because the vector is for barrel direction, low poly tank modified.
 	if (!ensure(ProjectileMovement)) { return; }
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * LaunchSpeed);
 	ProjectileMovement->Activate();
+	RecoilForce->FireImpulse();
+
+	LaunchSound->SetRelativeLocation(GetRootComponent()->GetOwner()->GetActorLocation());
+	LaunchSound->Play();
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
@@ -55,6 +67,7 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
+	ExplosionSound->Play();
 
 	// destroy CollisionMesh
 	SetRootComponent(ImpactBlast);
