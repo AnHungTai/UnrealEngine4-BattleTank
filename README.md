@@ -54,4 +54,5 @@ An-Hung Tai
 * Snowy weather
 * Tweaking snow parameter
 * Setup projectile sound
+* Refine projectile sound & setup dust kickup trail
 *

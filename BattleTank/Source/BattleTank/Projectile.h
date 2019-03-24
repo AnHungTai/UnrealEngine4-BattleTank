@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
+#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 #include "Runtime/Engine/Classes/PhysicsEngine/RadialForceComponent.h"
-#include "Runtime/Engine/Classes/Components/AudioComponent.h"
+#include "Runtime/Engine/Classes/Sound/SoundCue.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -65,11 +65,11 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	URadialForceComponent* ExplosionForce = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UAudioComponent* LaunchSound = nullptr;
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	USoundCue* LaunchSound = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UAudioComponent* ExplosionSound = nullptr;
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	USoundCue* ExplosionSound = nullptr;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);

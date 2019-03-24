@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "Runtime/Engine/Classes/GameFramework/DamageType.h"
+
 // Sets default values
 AProjectile::AProjectile()
 {
@@ -29,13 +30,6 @@ AProjectile::AProjectile()
 
 	ExplosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
 	ExplosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-
-	LaunchSound = CreateDefaultSubobject<UAudioComponent>(FName("Launch Sound"));
-	LaunchSound->AttachToComponent(LaunchBlast, FAttachmentTransformRules::KeepRelativeTransform);
-
-	ExplosionSound = CreateDefaultSubobject<UAudioComponent>(FName("Explosion Sound"));
-	ExplosionSound->AttachToComponent(ImpactBlast, FAttachmentTransformRules::KeepRelativeTransform);
-	ExplosionSound->bAutoActivate = false;
 }
 
 // Called when the game starts or when spawned
@@ -58,8 +52,7 @@ void AProjectile::LaunchProjectile(float LaunchSpeed)
 	ProjectileMovement->Activate();
 	RecoilForce->FireImpulse();
 
-	LaunchSound->SetRelativeLocation(GetRootComponent()->GetOwner()->GetActorLocation());
-	LaunchSound->Play();
+	UGameplayStatics::PlaySoundAtLocation(this, LaunchSound, GetActorLocation());
 }
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
@@ -67,7 +60,8 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
-	ExplosionSound->Play();
+
+	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSound, GetActorLocation());
 
 	// destroy CollisionMesh
 	SetRootComponent(ImpactBlast);
