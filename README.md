@@ -57,4 +57,5 @@ An-Hung Tai
 * Refine projectile sound & setup dust kickup trail
 * Refine dust kickup trail
 * Setup engine sound
+* Alternative way solving UI overlapping problem
 *
