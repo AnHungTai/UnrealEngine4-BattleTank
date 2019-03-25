@@ -56,4 +56,5 @@ An-Hung Tai
 * Setup projectile sound
 * Refine projectile sound & setup dust kickup trail
 * Refine dust kickup trail
+* Setup engine sound
 *
