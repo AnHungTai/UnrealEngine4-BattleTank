@@ -58,4 +58,5 @@ An-Hung Tai
 * Refine dust kickup trail
 * Setup engine sound
 * Alternative way solving UI overlapping problem
+* Introducing compass, crosshair and notification
 *
