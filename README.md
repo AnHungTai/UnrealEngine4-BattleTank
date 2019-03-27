@@ -59,4 +59,5 @@ An-Hung Tai
 * Setup engine sound
 * Alternative way solving UI overlapping problem
 * Introducing compass, crosshair and notification
+* AI tanks are marked on compass
 *
