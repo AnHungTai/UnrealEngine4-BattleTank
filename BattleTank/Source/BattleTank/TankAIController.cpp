@@ -28,7 +28,8 @@ void ATankAIController::SetPawn(APawn* InPawn)
 void ATankAIController::OnPossessedTankDeath()
 {
 	if (!ensure(GetPawn())) { return; }
-	GetPawn()->DetachFromControllerPendingDestroy();
+	//GetPawn()->DetachFromControllerPendingDestroy();
+	GetPawn()->Destroy();
 }
 
 void ATankAIController::Tick(float DeltaTime)

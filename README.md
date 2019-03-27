@@ -60,4 +60,5 @@ An-Hung Tai
 * Alternative way solving UI overlapping problem
 * Introducing compass, crosshair and notification
 * AI tanks are marked on compass
+* Improve gamemode, start & end game etc.
 *
