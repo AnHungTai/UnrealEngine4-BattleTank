@@ -23,15 +23,22 @@ public:
 
 	FTankDelegate OnDeath;
 
+	void DestroyTank();
+
 private:
 	// Sets default values for this pawn's properties
 	ATank();
 
 	virtual void BeginPlay() override;
 
+	void OnTimeExpire();
+
 	UPROPERTY(EditDefaultsOnly, Category = "Health")
 	float StartingHealth = 100.0;
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	float CurrentHealth;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float DestroyDelay = 3.0;
 };

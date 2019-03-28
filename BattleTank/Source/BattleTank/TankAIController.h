@@ -6,6 +6,8 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
+class ATank;
+
 /**
  * 
  */
@@ -17,7 +19,7 @@ class BATTLETANK_API ATankAIController : public AAIController
 protected:
 	// how close the AI close to the player
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	float AcceptanceRadius = 2000.0;
+	float AcceptanceRadius = 5000.0;
 
 	UFUNCTION()
 	void OnPossessedTankDeath();

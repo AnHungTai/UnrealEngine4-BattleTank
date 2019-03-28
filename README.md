@@ -61,4 +61,5 @@ An-Hung Tai
 * Introducing compass, crosshair and notification
 * AI tanks are marked on compass
 * Improve gamemode, start & end game etc.
+* Refactor Blueprint & AI tank destroyed method
 *

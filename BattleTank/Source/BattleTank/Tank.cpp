@@ -1,6 +1,7 @@
 //  Copyright An-Hung Tai
 
 #include "Tank.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 #include "BattleTank.h"
 
 // Sets default values
@@ -15,6 +16,22 @@ void ATank::BeginPlay()
 	Super::BeginPlay();
 	CurrentHealth = StartingHealth;
 }
+
+void ATank::DestroyTank()
+{
+	if (!GetController())
+	{
+		// destroy Actor
+		FTimerHandle Timer;
+		GetWorld()->GetTimerManager().SetTimer(Timer, this, &ATank::OnTimeExpire, DestroyDelay, false);
+	};
+}
+
+void ATank::OnTimeExpire()
+{
+	Destroy();
+}
+
 
 float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
 {
@@ -34,3 +51,4 @@ float ATank::GetHealthPercent() const
 {
 	return CurrentHealth / StartingHealth;
 }
+
