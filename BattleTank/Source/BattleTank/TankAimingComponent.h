@@ -74,7 +74,7 @@ private:
 	int32 AmmoLeft = 20;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	TSubclassOf<AProjectile>ProjectileBlueprint;
+	TSubclassOf<AActor>ProjectileBlueprint;
 
 	double LastFireTime = 0.0;
 };
