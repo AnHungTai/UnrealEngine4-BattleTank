@@ -63,4 +63,5 @@ An-Hung Tai
 * Improve gamemode, start & end game etc.
 * Refactor blueprint & AI tank destroyed method
 * Debug hot reload losing issue
+* Setup tutorial level and gamemode
 *

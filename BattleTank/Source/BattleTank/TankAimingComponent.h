@@ -71,7 +71,7 @@ private:
 	float ReloadTimeInSecond = 2.0;
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
-	int32 AmmoLeft = 20;
+	int32 AmmoLeft = 50;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AActor>ProjectileBlueprint;
