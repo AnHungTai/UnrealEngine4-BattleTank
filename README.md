@@ -64,4 +64,5 @@ An-Hung Tai
 * Refactor blueprint & AI tank destroyed method
 * Debug hot reload losing issue
 * Setup tutorial level and gamemode
+* Continue tutorial game flow design
 *
