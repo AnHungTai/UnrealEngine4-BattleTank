@@ -65,4 +65,5 @@ An-Hung Tai
 * Debug hot reload losing issue
 * Setup tutorial level and gamemode
 * Continue tutorial game flow design
+* Setup destructible meshes
 *
