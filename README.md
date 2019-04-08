@@ -66,4 +66,5 @@ An-Hung Tai
 * Setup tutorial level and gamemode
 * Continue tutorial game flow design
 * Setup destructible meshes
+* Update user interface
 *
