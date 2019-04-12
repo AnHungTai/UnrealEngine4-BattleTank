@@ -67,4 +67,5 @@ An-Hung Tai
 * Continue tutorial game flow design
 * Setup destructible meshes
 * Update user interface
+* Update to UE4.22.0
 *
